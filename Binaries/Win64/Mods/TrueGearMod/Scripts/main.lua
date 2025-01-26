@@ -199,9 +199,9 @@ function RegisterHooks()
 	local hook1, hook2 = RegisterHook(funcName, OnStaminaChange)
 	hookIds[funcName] = { id1 = hook1; id2 = hook2 }
 
-	local funcName = "/Game/ITR2/BPs/Player/BP_RadiusPlayerController.BP_RadiusPlayerController_C:Multicast_OnSleep"
-	local hook1, hook2 = RegisterHook(funcName, Multicast_OnSleep)
-	hookIds[funcName] = { id1 = hook1; id2 = hook2 }
+	-- local funcName = "/Game/ITR2/BPs/Player/BP_RadiusPlayerController.BP_RadiusPlayerController_C:Multicast_OnSleep"
+	-- local hook1, hook2 = RegisterHook(funcName, Multicast_OnSleep)
+	-- hookIds[funcName] = { id1 = hook1; id2 = hook2 }
 
 	local funcName = "/Script/IntoTheRadius2.RadiusFirearmComponent:DeliverAmmoFromMagToChamber"
 	local hook1, hook2 = RegisterHook(funcName, DeliverAmmoFromMagToChamber)
@@ -215,14 +215,15 @@ function RegisterHooks()
 	local hook1, hook2 = RegisterHook(funcName, OnComponentBeginOverlap_Event)
 	hookIds[funcName] = { id1 = hook1; id2 = hook2 }
 
-
-
+	local funcName = "/Game/ITR2/BPs/Items/Artefacts/BP_Detector.BP_Detector_C:Beep"
+	local hook1, hook2 = RegisterHook(funcName, Beep)
+	hookIds[funcName] = { id1 = hook1; id2 = hook2 }
 
 	-- local funcName = "/Game/ITR2/BPs/Player/BPC_PlayerMouth.BPC_PlayerMouth_C:Smoking"
 	-- local hook1, hook2 = RegisterHook(funcName, Smoking)
 	-- hookIds[funcName] = { id1 = hook1; id2 = hook2 }
 
-		-- local funcName = "/Game/ITR2/BPs/Player/BPC_PlayerMouth.BPC_PlayerMouth_C:Exhale"
+	-- local funcName = "/Game/ITR2/BPs/Player/BPC_PlayerMouth.BPC_PlayerMouth_C:Exhale"
 	-- local hook1, hook2 = RegisterHook(funcName, Exhale)
 	-- hookIds[funcName] = { id1 = hook1; id2 = hook2 }
 
@@ -230,6 +231,12 @@ function RegisterHooks()
 end
 
 -- *******************************************************************
+
+function Beep(self)
+		SendMessage("--------------------------------")
+		SendMessage("DetectorBeep")
+		truegear.play_effect_by_uuid("Healing")
+end
 
 function OnComponentBeginOverlap_Event(self)
 	if self:get():GetPropertyValue("LastHolstered"):IsValid() then
